@@ -12,7 +12,7 @@ const nextConfig = {
           {
             id: 1,
             tag: "Current User Information",
-            path: "/business/home",
+            path: "/control/home",
           },
         ],
       },
@@ -23,12 +23,12 @@ const nextConfig = {
           {
             id: 1,
             tag: "User Information Management",
-            path: "/business/user_info/user",
+            path: "/control/user_info/user",
           },
           {
             id: 2,
             tag: "User Group Management",
-            path: "/business/user_info/group",
+            path: "/control/user_info/group",
           },
         ],
       },
@@ -36,27 +36,27 @@ const nextConfig = {
         id: 3,
         outerTag: "Service Control",
         innerList: [
-          { id: 1, tag: "Service Management", path: "/business/service_ctrl" },
+          { id: 1, tag: "Service Management", path: "/control/service_ctrl" },
         ],
       },
       {
         id: 4,
         outerTag: "Access Control",
         innerList: [
-          { id: 1, tag: "Access Management", path: "/business/access_ctrl" },
+          { id: 1, tag: "Access Management", path: "/control/access_ctrl" },
         ],
       },
       {
         id: 5,
         outerTag: "Subsystem Control",
         innerList: [
-          { id: 1, tag: "Subsystem Management", path: "/business/subsys_ctrl" },
+          { id: 1, tag: "Subsystem Management", path: "/control/subsys_ctrl" },
         ],
       },
       {
         id: 6,
         outerTag: "Business Process",
-        innerList: [{ id: 1, tag: "Test Page", path: "/test/business" }],
+        innerList: [{ id: 1, tag: "Test Page", path: "/test/control" }],
       },
     ],
   },

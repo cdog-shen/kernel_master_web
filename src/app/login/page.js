@@ -59,7 +59,7 @@ export default function App() {
           `${resp.data.token_type} ${resp.data.token}`
         );
         localStorage.setItem("uid", Number(resp.data.uid));
-        window.location.href = "/business/home";
+        window.location.href = "/control/home";
       }
     } catch (error) {
       console.log(error);

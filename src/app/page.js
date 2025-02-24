@@ -21,7 +21,7 @@ export default function Page() {
           );
 
           if (response.ok) {
-            redirect("/business/user");
+            redirect("/control/user");
           }
         } catch (error) {
           redirect("/login");
