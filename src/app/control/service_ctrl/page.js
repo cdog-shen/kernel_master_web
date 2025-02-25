@@ -87,12 +87,20 @@ export default function app() {
       <PopOutDialog
         head={`new service`}
         hint={`is_enable 可选状态(0/1) ; servce_point 为访问路径`}
-        headerArr={["service_name", "service_point", "is_enable"]}
+        headerArr={["service_name", "service_point", "nick_name", "is_enable"]}
         newEffect={NewServiceHandler}
       />
       <DynEditableForm
         title={"用户组信息"}
-        headerArr={["ID", "服务名", "请求路径", "状态", "修改时间", "修改"]}
+        headerArr={[
+          "ID",
+          "服务名",
+          "别名",
+          "请求路径",
+          "状态",
+          "修改时间",
+          "修改",
+        ]}
         dataArr={servicesData.data}
         editEffect={EditServiceHandler}
       />
