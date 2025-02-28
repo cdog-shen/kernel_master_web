@@ -1,50 +1,32 @@
 "use client";
-import { useState } from "react";
 import {
   NormalInput,
   CommonButton,
   NormalCheckBox,
 } from "@/components/input/input";
+import { LoginFetch } from "@/fetchs/control/user";
+import { BingDaily } from "@/fetchs/control/common";
 import { Alert, useAlert } from "@/components/alert/alert";
 import { Divider } from "@/components/containers/dividers";
-
-async function LoginFetch(username, password) {
-  try {
-    const resp = await fetch(`${process.env.BACKEND_BASE_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        passwd: password,
-      }),
-    });
-
-    if (!resp.ok) {
-      return {
-        code: 500,
-        key: "Login in Error.",
-        data: {},
-      };
-    }
-
-    const data = await resp.json();
-    return data;
-  } catch (error) {
-    return {
-      code: 500,
-      key: "Login in Error.",
-      data: {},
-    };
-  }
-}
+import { useState, useEffect, use } from "react";
 
 export default function App() {
   const { isVisible, message, showAlert, hideAlert } = useAlert();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [bingDaily, setBingDaily] = useState("https://dailybing.com/api/v1");
+
+  // useEffect(() => {
+  //   BingDaily().then((resp) => {
+  //     if (resp.code != 200) {
+  //       showAlert("获取背景图片失败.");
+  //       console.log(resp);
+  //     } else {
+  //       setBingDaily(resp.data);
+  //     }
+  //   });
+  // }, []);
 
   const handleLogin = async (event) => {
     event.preventDefault(); // 阻止表单的默认提交行为
@@ -66,9 +48,13 @@ export default function App() {
       showAlert("登陆失败.");
     }
   };
+  console.log(bingDaily);
 
   return (
-    <div className="flex p-5 relative min-h-screen w-full justify-center items-center bg-[rgba(30,58,95,1)] bg-[url('https://bing.img.run/rand_uhd.php')] bg-cover bg-center bg-no-repeat">
+    <div
+      className={`flex p-5 relative min-h-screen w-full justify-center items-center bg-[rgba(30,58,95,1)] bg-cover bg-center bg-no-repeat`}
+      style={{ backgroundImage: `url(${bingDaily})` }}
+    >
       <div className="flex h-auto">
         {/* login form */}
         <div className="flex-1 w-[30%] bg-white/80 p-5 shadow-lg rounded-l-3xl">

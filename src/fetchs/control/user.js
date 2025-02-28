@@ -1,3 +1,35 @@
+export async function LoginFetch(username, password) {
+  try {
+    const resp = await fetch(`${process.env.BACKEND_BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        passwd: password,
+      }),
+    });
+
+    if (!resp.ok) {
+      return {
+        code: 500,
+        key: "Login in Error.",
+        data: {},
+      };
+    }
+
+    const data = await resp.json();
+    return data;
+  } catch (error) {
+    return {
+      code: 500,
+      key: "Login in Error.",
+      data: {},
+    };
+  }
+}
+
 export async function FetchAllUser(jwt) {
   try {
     const resp = await fetch(`${process.env.BACKEND_BASE_URL}/auth/all_user`, {
