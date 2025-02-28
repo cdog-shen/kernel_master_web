@@ -83,7 +83,7 @@ export function DynEditableForm({ title, headerArr, dataArr, editEffect }) {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {formData.map((dataObj, rowIndex) => (
+            {formData?.map((dataObj, rowIndex) => (
               <tr key={rowIndex}>
                 {Object.entries(dataObj).map(([key, value], colIndex) => (
                   <td
