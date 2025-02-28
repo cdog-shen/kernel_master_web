@@ -55,6 +55,14 @@ const nextConfig = {
       },
       {
         id: 6,
+        outerTag: "Subsystem Configuration",
+        innerList: [
+          { id: 1, tag: "CMDB", path: "/subsystem/cmdb_cfg" },
+          { id: 2, tag: "cloud-api", path: "/subsystem/capi_cfg" },
+        ],
+      },
+      {
+        id: 7,
         outerTag: "Business Process",
         innerList: [{ id: 1, tag: "Test Page", path: "/test/control" }],
       },
