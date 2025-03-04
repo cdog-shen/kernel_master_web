@@ -1,6 +1,7 @@
 "use client";
 import { DynEditableForm } from "@/components/containers/forms";
 import { PopOutDialog } from "@/components/containers/dialogs";
+import { CallSubsys } from "@/fetchs/control/subsys";
 import { useEffect, useState } from "react";
 
 export default function app() {
@@ -15,8 +16,16 @@ export default function app() {
     const fetchKeysInfo = async () => {
       try {
         setLoading(true);
-        // const data = await FetchAllKey(localStorage.getItem("JWT"));
-        // setKeysData(data);
+        const data = await CallSubsys(
+          localStorage.getItem("JWT"),
+          "cloud_api",
+          {
+            operation: "account_db",
+            target: "get",
+            data: {},
+          }
+        );
+        setKeysData(data);
       } catch (error) {
         setError(error);
       } finally {
@@ -84,12 +93,28 @@ export default function app() {
       <PopOutDialog
         head={`new Key`}
         hint={`is_enable 可选状态(0/1) ;`}
-        headerArr={["ID"]}
+        headerArr={[
+          "cloud_provider",
+          "nick_name",
+          "ak",
+          "sk",
+          "is_enable",
+          "comment",
+        ]}
         newEffect={NewKeyHandler}
       />
       <DynEditableForm
-        title={"用户组信息"}
-        headerArr={["ID"]}
+        title={"云权限信息"}
+        headerArr={[
+          "id",
+          "cloud_provider",
+          "nick_name",
+          "ak",
+          "sk",
+          "is_enable",
+          "update_time",
+          "comment",
+        ]}
         dataArr={keysData.data}
         editEffect={EditKeyHandler}
       />
