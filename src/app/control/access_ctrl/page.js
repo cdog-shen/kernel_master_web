@@ -83,7 +83,13 @@ export default function app() {
       <PopOutDialog
         head={`new access`}
         hint={`is_enable 可选状态(0/1) ; 当前权限可选 (0:无, 1:读, 2:可写) `}
-        headerArr={["服务ID", "用户组ID", "当前权限", "状态", "注释"]}
+        headerArr={[
+          "service_id",
+          "group_id",
+          "group_access",
+          "is_enable",
+          "comment",
+        ]}
         newEffect={NewAccessHandler}
       />
       <DynEditableForm
