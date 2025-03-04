@@ -147,3 +147,39 @@ export async function DeleteSubsys(jwt, data) {
     };
   }
 }
+
+export async function CallSubsys(jwt, subsys, data) {
+  try {
+    const params = data;
+
+    const resp = await fetch(
+      `${process.env.BACKEND_BASE_URL}/subsystem_call/${subsys}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: jwt,
+        },
+        body: JSON.stringify(params),
+      }
+    );
+
+    if (!resp.ok) {
+      return {
+        code: 500,
+        msg: "http response error",
+        data: await resp.text(),
+      };
+    }
+    const resp_obj = await resp.json();
+    console.log(resp_obj);
+    return resp_obj.data;
+  } catch (error) {
+    console.error("Error when update subsys data:", error);
+    return {
+      code: 500,
+      msg: "Error when update subsys data",
+      data: String(error),
+    };
+  }
+}
