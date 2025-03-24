@@ -35,7 +35,7 @@ export async function NewService(jwt, data) {
     const params = {
       service_name: data.service_name ? data.service_name : null,
       service_point: data.service_point ? data.service_point : null,
-      nick_nake: data.nick_nake ? data.nick_nake : null,
+      nick_name: data.nick_name ? data.nick_name : null,
       is_enable: data.is_enable ? Number(data.is_enable) : null,
     };
     console.log(params);
@@ -76,7 +76,7 @@ export async function EditService(jwt, data) {
       id: data.id,
       service_name: data.service_name ? data.service_name : null,
       service_point: data.service_point ? data.service_point : null,
-      nick_nake: data.nick_nake ? data.nick_nake : null,
+      nick_name: data.nick_name ? data.nick_name : null,
       is_enable: data.is_enable ? Number(data.is_enable) : null,
     };
     const resp = await fetch(
