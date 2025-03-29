@@ -24,8 +24,6 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import { ReactNode } from "react";
 import { useState, useEffect, Fragment } from "react";
 
-import { LogoutFetch } from "@/fetch/control/user";
-
 const serviceArray:
   | {
       id: string;
@@ -155,7 +153,7 @@ export default function businessLayout({ children }: { children: ReactNode }) {
             ></Box>
             <Box sx={{ flexGrow: 0 }}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="r" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
               <Menu
                 sx={{ mt: "45px" }}
