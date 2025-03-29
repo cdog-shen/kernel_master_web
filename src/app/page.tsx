@@ -15,13 +15,13 @@ export default function Page() {
             {
               method: "GET",
               headers: {
-                Authorization: jwt,
+                Authorization: jwt || "",
               },
             }
           );
 
           if (response.ok) {
-            redirect("/control/user");
+            redirect("/control/home");
           }
         } catch (error) {
           redirect("/login");

@@ -29,7 +29,7 @@ export async function BingDaily() {
   }
 }
 
-export async function FetchUsi(uid, jwt) {
+export async function FetchUsi(uid: string, jwt: string) {
   try {
     const resp = await fetch(`${process.env.BACKEND_BASE_URL}/auth/me/${uid}`, {
       method: "GET",

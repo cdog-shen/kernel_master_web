@@ -1,4 +1,8 @@
-export async function LoginFetch(username, password) {
+export async function LoginFetch(
+  username: string,
+  password: string,
+  rememberMe: boolean
+) {
   try {
     const resp = await fetch(`${process.env.BACKEND_BASE_URL}/auth/login`, {
       method: "POST",
@@ -30,7 +34,7 @@ export async function LoginFetch(username, password) {
   }
 }
 
-export async function FetchAllUser(jwt) {
+export async function FetchAllUser(jwt: string) {
   try {
     const resp = await fetch(`${process.env.BACKEND_BASE_URL}/auth/all_user`, {
       method: "GET",
@@ -59,7 +63,12 @@ export async function FetchAllUser(jwt) {
   }
 }
 
-export async function NewUser(jwt, data) {
+interface UserData {
+  username?: string;
+  passwd?: string;
+}
+
+export async function NewUser(jwt: string, data: UserData) {
   try {
     const params = {
       username: data.username ? data.username : null,
@@ -94,7 +103,15 @@ export async function NewUser(jwt, data) {
   }
 }
 
-export async function EditUser(jwt, data) {
+interface EditUserData {
+  id: string;
+  username?: string;
+  is_enable?: boolean;
+  name?: string;
+  contact?: string;
+}
+
+export async function EditUser(jwt: string, data: EditUserData) {
   try {
     const contact = JSON.parse(data.contact ? `${data.contact}` : "{}");
     const params = {
@@ -122,9 +139,8 @@ export async function EditUser(jwt, data) {
         msg: "http response error",
         data: await resp.text(),
       };
+      return await resp.json();
     }
-
-    return await resp.json();
   } catch (error) {
     console.error("Error when update group data:", error);
     return {
@@ -135,7 +151,11 @@ export async function EditUser(jwt, data) {
   }
 }
 
-export async function DeleteUser(jwt, data) {
+interface DeleteUserData {
+  id: string;
+}
+
+export async function DeleteUser(jwt: string, data: DeleteUserData) {
   try {
     const params = {
       id: data.id,

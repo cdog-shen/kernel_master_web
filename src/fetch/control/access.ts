@@ -1,7 +1,7 @@
-export async function FetchAllSubsys(jwt) {
+export async function FetchAllAccess(jwt: string) {
   try {
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/subsystem_control/all_subsystem`,
+      `${process.env.BACKEND_BASE_URL}/access_control/all_access`,
       {
         method: "GET",
         headers: {
@@ -30,18 +30,27 @@ export async function FetchAllSubsys(jwt) {
   }
 }
 
-export async function NewSubsys(jwt, data) {
+export async function NewAccess(
+  jwt: string,
+  data: {
+    service_id?: number;
+    group_id?: number;
+    group_access?: number;
+    is_enable?: number;
+    comment?: string;
+  }
+) {
   try {
     const params = {
-      subsys_name: data.subsys_name ? data.subsys_name : null,
-      url: data.url ? data.url : null,
+      service_id: data.service_id ? Number(data.service_id) : null,
+      group_id: data.group_id ? Number(data.group_id) : null,
+      group_access: data.group_access ? Number(data.group_access) : null,
       is_enable: data.is_enable ? Number(data.is_enable) : null,
-      relate_service: data.relate_service ? Number(data.relate_service) : null,
-      token: data.token ? data.token : null,
+      comment: data.comment ? data.comment : null,
     };
     console.log(params);
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/subsystem_control/new_subsystem`,
+      `${process.env.BACKEND_BASE_URL}/access_control/new_access`,
       {
         method: "POST",
         headers: {
@@ -62,27 +71,37 @@ export async function NewSubsys(jwt, data) {
 
     return await resp.json();
   } catch (error) {
-    console.error("Error when update subsys data:", error);
+    console.error("Error when update access data:", error);
     return {
       code: 500,
-      msg: "Error when update subsys data",
+      msg: "Error when update access data",
       data: String(error),
     };
   }
 }
 
-export async function EditSubsys(jwt, data) {
+export async function EditAccess(
+  jwt: string,
+  data: {
+    id: number;
+    service_id?: number;
+    group_id?: number;
+    group_access?: number;
+    is_enable?: number;
+    comment?: string;
+  }
+) {
   try {
     const params = {
       id: data.id,
-      subsys_name: data.subsys_name ? data.subsys_name : null,
-      url: data.url ? data.url : null,
+      service_id: data.service_id ? Number(data.service_id) : null,
+      group_id: data.group_id ? Number(data.group_id) : null,
+      group_access: data.group_access ? Number(data.group_access) : null,
       is_enable: data.is_enable ? Number(data.is_enable) : null,
-      relate_service: data.relate_service ? Number(data.relate_service) : null,
-      token: data.token ? data.token : null,
+      comment: data.comment ? data.comment : null,
     };
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/subsystem_control/update_subsystem`,
+      `${process.env.BACKEND_BASE_URL}/access_control/update_access`,
       {
         method: "POST",
         headers: {
@@ -103,22 +122,22 @@ export async function EditSubsys(jwt, data) {
 
     return await resp.json();
   } catch (error) {
-    console.error("Error when update subsys data:", error);
+    console.error("Error when update access data:", error);
     return {
       code: 500,
-      msg: "Error when update subsys data",
+      msg: "Error when update access data",
       data: String(error),
     };
   }
 }
 
-export async function DeleteSubsys(jwt, data) {
+export async function DeleteAccess(jwt: string, id: number) {
   try {
     const params = {
-      id: data.id,
+      id: id,
     };
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/subsystem_control/delete_subsystem`,
+      `${process.env.BACKEND_BASE_URL}/access_control/delete_access`,
       {
         method: "DELETE",
         headers: {
@@ -139,46 +158,10 @@ export async function DeleteSubsys(jwt, data) {
 
     return await resp.json();
   } catch (error) {
-    console.error("Error when update subsys data:", error);
+    console.error("Error when delete access data:", error);
     return {
       code: 500,
-      msg: "Error when update subsys data",
-      data: String(error),
-    };
-  }
-}
-
-export async function CallSubsys(jwt, subsys, data) {
-  try {
-    const params = data;
-
-    const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/subsystem_call/${subsys}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: jwt,
-        },
-        body: JSON.stringify(params),
-      }
-    );
-
-    if (!resp.ok) {
-      return {
-        code: 500,
-        msg: "http response error",
-        data: await resp.text(),
-      };
-    }
-    const resp_obj = await resp.json();
-    console.log(resp_obj);
-    return resp_obj.data;
-  } catch (error) {
-    console.error("Error when update subsys data:", error);
-    return {
-      code: 500,
-      msg: "Error when update subsys data",
+      msg: "Error when delete access data",
       data: String(error),
     };
   }

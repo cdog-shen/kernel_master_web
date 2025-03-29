@@ -1,7 +1,7 @@
-export async function FetchAllGroup(jwt) {
+export async function FetchAllService(jwt: string) {
   try {
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/group_control/all_group`,
+      `${process.env.BACKEND_BASE_URL}/service_control/all_service`,
       {
         method: "GET",
         headers: {
@@ -30,17 +30,25 @@ export async function FetchAllGroup(jwt) {
   }
 }
 
-export async function NewGroup(jwt, data) {
+export async function NewService(
+  jwt: string,
+  data: {
+    service_name?: string;
+    service_point?: string;
+    nick_name?: string;
+    is_enable?: boolean;
+  }
+) {
   try {
-    const user_id_arr = JSON.parse(data.user_ids ? `[${data.user_ids}]` : "[]");
     const params = {
-      name: data.name ? data.name : null,
+      service_name: data.service_name ? data.service_name : null,
+      service_point: data.service_point ? data.service_point : null,
+      nick_name: data.nick_name ? data.nick_name : null,
       is_enable: data.is_enable ? Number(data.is_enable) : null,
-      user_ids: user_id_arr,
     };
     console.log(params);
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/group_control/new_group`,
+      `${process.env.BACKEND_BASE_URL}/service_control/new_service`,
       {
         method: "POST",
         headers: {
@@ -61,26 +69,35 @@ export async function NewGroup(jwt, data) {
 
     return await resp.json();
   } catch (error) {
-    console.error("Error when update group data:", error);
+    console.error("Error when update service data:", error);
     return {
       code: 500,
-      msg: "Error when update group data",
+      msg: "Error when update service data",
       data: String(error),
     };
   }
 }
 
-export async function EditGroup(jwt, data) {
+export async function EditService(
+  jwt: string,
+  data: {
+    id: string;
+    service_name?: string;
+    service_point?: string;
+    nick_name?: string;
+    is_enable?: boolean;
+  }
+) {
   try {
-    const user_id_arr = JSON.parse(data.user_ids ? `[${data.user_ids}]` : "[]");
     const params = {
       id: data.id,
-      name: data.name ? data.name : null,
+      service_name: data.service_name ? data.service_name : null,
+      service_point: data.service_point ? data.service_point : null,
+      nick_name: data.nick_name ? data.nick_name : null,
       is_enable: data.is_enable ? Number(data.is_enable) : null,
-      user_ids: user_id_arr,
     };
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/group_control/update_group`,
+      `${process.env.BACKEND_BASE_URL}/service_control/update_service`,
       {
         method: "POST",
         headers: {
@@ -101,26 +118,29 @@ export async function EditGroup(jwt, data) {
 
     return await resp.json();
   } catch (error) {
-    console.error("Error when update group data:", error);
+    console.error("Error when update service data:", error);
     return {
       code: 500,
-      msg: "Error when update group data",
+      msg: "Error when update service data",
       data: String(error),
     };
   }
 }
 
-export async function DeleteGroup(jwt, id) {
+export async function DeleteService(jwt: string, id: string) {
   try {
+    const params = {
+      id: id,
+    };
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/group_control/delete_group`,
+      `${process.env.BACKEND_BASE_URL}/service_control/delete_service`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: jwt,
         },
-        body: JSON.stringify({ id: id }),
+        body: JSON.stringify(params),
       }
     );
 
@@ -134,10 +154,10 @@ export async function DeleteGroup(jwt, id) {
 
     return await resp.json();
   } catch (error) {
-    console.error("Error when delete group data:", error);
+    console.error("Error when delete service data:", error);
     return {
       code: 500,
-      msg: "Error when delete group data",
+      msg: "Error when delete service data",
       data: String(error),
     };
   }

@@ -1,7 +1,7 @@
-export async function FetchAllAccess(jwt) {
+export async function FetchAllGroup(jwt: string) {
   try {
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/access_control/all_access`,
+      `${process.env.BACKEND_BASE_URL}/group_control/all_group`,
       {
         method: "GET",
         headers: {
@@ -30,18 +30,20 @@ export async function FetchAllAccess(jwt) {
   }
 }
 
-export async function NewAccess(jwt, data) {
+export async function NewGroup(
+  jwt: string,
+  data: { user_ids?: string; name?: string; is_enable?: boolean }
+) {
   try {
+    const user_id_arr = JSON.parse(data.user_ids ? `[${data.user_ids}]` : "[]");
     const params = {
-      service_id: data.service_id ? Number(data.service_id) : null,
-      group_id: data.group_id ? Number(data.group_id) : null,
-      group_access: data.group_access ? Number(data.group_access) : null,
+      name: data.name ? data.name : null,
       is_enable: data.is_enable ? Number(data.is_enable) : null,
-      comment: data.comment ? data.comment : null,
+      user_ids: user_id_arr,
     };
     console.log(params);
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/access_control/new_access`,
+      `${process.env.BACKEND_BASE_URL}/group_control/new_group`,
       {
         method: "POST",
         headers: {
@@ -62,27 +64,29 @@ export async function NewAccess(jwt, data) {
 
     return await resp.json();
   } catch (error) {
-    console.error("Error when update access data:", error);
+    console.error("Error when update group data:", error);
     return {
       code: 500,
-      msg: "Error when update access data",
+      msg: "Error when update group data",
       data: String(error),
     };
   }
 }
 
-export async function EditAccess(jwt, data) {
+export async function EditGroup(
+  jwt: string,
+  data: { id: string; user_ids?: string; name?: string; is_enable?: boolean }
+) {
   try {
+    const user_id_arr = JSON.parse(data.user_ids ? `[${data.user_ids}]` : "[]");
     const params = {
       id: data.id,
-      service_id: data.service_id ? Number(data.service_id) : null,
-      group_id: data.group_id ? Number(data.group_id) : null,
-      group_access: data.group_access ? Number(data.group_access) : null,
+      name: data.name ? data.name : null,
       is_enable: data.is_enable ? Number(data.is_enable) : null,
-      comment: data.comment ? data.comment : null,
+      user_ids: user_id_arr,
     };
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/access_control/update_access`,
+      `${process.env.BACKEND_BASE_URL}/group_control/update_group`,
       {
         method: "POST",
         headers: {
@@ -103,29 +107,26 @@ export async function EditAccess(jwt, data) {
 
     return await resp.json();
   } catch (error) {
-    console.error("Error when update access data:", error);
+    console.error("Error when update group data:", error);
     return {
       code: 500,
-      msg: "Error when update access data",
+      msg: "Error when update group data",
       data: String(error),
     };
   }
 }
 
-export async function DeleteAccess(jwt, id) {
+export async function DeleteGroup(jwt: string, id: string) {
   try {
-    const params = {
-      id: id,
-    };
     const resp = await fetch(
-      `${process.env.BACKEND_BASE_URL}/access_control/delete_access`,
+      `${process.env.BACKEND_BASE_URL}/group_control/delete_group`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: jwt,
         },
-        body: JSON.stringify(params),
+        body: JSON.stringify({ id: id }),
       }
     );
 
@@ -139,10 +140,10 @@ export async function DeleteAccess(jwt, id) {
 
     return await resp.json();
   } catch (error) {
-    console.error("Error when delete access data:", error);
+    console.error("Error when delete group data:", error);
     return {
       code: 500,
-      msg: "Error when delete access data",
+      msg: "Error when delete group data",
       data: String(error),
     };
   }
