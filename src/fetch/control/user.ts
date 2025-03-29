@@ -34,6 +34,36 @@ export async function LoginFetch(
   }
 }
 
+export async function LogoutFetch(jwt: string, username: string) {
+  try {
+    const resp = await fetch(`${process.env.BACKEND_BASE_URL}/auth/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: jwt,
+      },
+      body: JSON.stringify({
+        username: username,
+      }),
+    });
+    if (!resp.ok) {
+      return {
+        code: 500,
+        msg: "http response error",
+        data: await resp.text(),
+      };
+    }
+    return await resp.json();
+  } catch (error) {
+    console.error("Error when logout:", error);
+    return {
+      code: 500,
+      msg: "Error when logout",
+      data: String(error),
+    };
+  }
+}
+
 export async function FetchAllUser(jwt: string) {
   try {
     const resp = await fetch(`${process.env.BACKEND_BASE_URL}/auth/all_user`, {
