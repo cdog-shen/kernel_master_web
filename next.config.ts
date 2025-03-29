@@ -1,10 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  env: {
-    BACKEND_BASE_URL:
-      process.env.BACKEND_BASE_URL || "http://localhost:8000/api", // localhost
+import type { NextConfig } from "next";
 
-    SERVICE_ARRAY: process.env.SERVICE_ARRAY || [
+const nextConfig: NextConfig = {
+  env: {
+    // BACKEND_BASE_URL:
+    // process.env.BACKEND_BASE_URL || "http://localhost:8000/api", // localhost
+    BACKEND_BASE_URL: "http://10.16.18.128:8000/api", // inner net
+
+    SERVICE_ARRAY: JSON.stringify([
       {
         id: 1,
         outerTag: "Authentication Service",
@@ -36,7 +38,11 @@ const nextConfig = {
         id: 3,
         outerTag: "Service Control",
         innerList: [
-          { id: 1, tag: "Service Management", path: "/control/service_ctrl" },
+          {
+            id: 1,
+            tag: "Service Management",
+            path: "/control/service_ctrl",
+          },
         ],
       },
       {
@@ -50,7 +56,11 @@ const nextConfig = {
         id: 5,
         outerTag: "Subsystem Control",
         innerList: [
-          { id: 1, tag: "Subsystem Management", path: "/control/subsys_ctrl" },
+          {
+            id: 1,
+            tag: "Subsystem Management",
+            path: "/control/subsys_ctrl",
+          },
         ],
       },
       {
@@ -66,7 +76,12 @@ const nextConfig = {
         outerTag: "Business Process",
         innerList: [{ id: 1, tag: "Test Page", path: "/test/control" }],
       },
-    ],
+      {
+        id: 99,
+        outerTag: "Test",
+        innerList: [{ id: 1, tag: "Test Page", path: "/test/control" }],
+      },
+    ]),
   },
 };
 
