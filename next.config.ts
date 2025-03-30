@@ -74,7 +74,13 @@ const nextConfig: NextConfig = {
       {
         id: 7,
         outerTag: "Business Process",
-        innerList: [{ id: 1, tag: "Test Page", path: "/test/control" }],
+        innerList: [
+          {
+            id: 1,
+            tag: "Light House Server managment",
+            path: "/business/light_house",
+          },
+        ],
       },
       {
         id: 99,
