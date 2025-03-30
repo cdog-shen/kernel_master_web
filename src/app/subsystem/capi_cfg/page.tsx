@@ -35,7 +35,7 @@ export default function app() {
             data: {},
           }
         );
-        setkeyData(data.data);
+        setkeyData(data.data.data);
       } catch (error) {
         setError(error as Error);
       } finally {
