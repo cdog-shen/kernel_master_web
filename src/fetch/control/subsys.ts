@@ -190,9 +190,7 @@ export async function CallSubsys(jwt: string, subsys: string, data: any) {
         data: await resp.text(),
       };
     }
-    const resp_obj = await resp.json();
-    console.log(resp_obj);
-    return resp_obj.data;
+    return await resp.json();
   } catch (error) {
     console.error("Error when update subsys data:", error);
     return {
