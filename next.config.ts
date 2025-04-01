@@ -1,10 +1,12 @@
 import type { NextConfig } from "next";
 
+const BACKEND_BASE_URL = "http://10.16.18.128:8000/api";
+const FRONT_ROOT_PATH = "";
+
 const nextConfig: NextConfig = {
   env: {
-    // BACKEND_BASE_URL:
-    // process.env.BACKEND_BASE_URL || "http://localhost:8000/api", // localhost
-    BACKEND_BASE_URL: "http://10.16.18.128:8000/api", // inner net
+    BACKEND_BASE_URL: BACKEND_BASE_URL,
+    FRONT_ROOT_PATH: FRONT_ROOT_PATH,
 
     SERVICE_ARRAY: JSON.stringify([
       {
@@ -14,7 +16,7 @@ const nextConfig: NextConfig = {
           {
             id: 1,
             tag: "Current User Information",
-            path: "/control/home",
+            path: `${FRONT_ROOT_PATH}/control/home`,
           },
         ],
       },
@@ -25,12 +27,12 @@ const nextConfig: NextConfig = {
           {
             id: 1,
             tag: "User Information Management",
-            path: "/control/user_info/user",
+            path: `${FRONT_ROOT_PATH}/control/user_info/user`,
           },
           {
             id: 2,
             tag: "User Group Management",
-            path: "/control/user_info/group",
+            path: `${FRONT_ROOT_PATH}/control/user_info/group`,
           },
         ],
       },
@@ -41,7 +43,7 @@ const nextConfig: NextConfig = {
           {
             id: 1,
             tag: "Service Management",
-            path: "/control/service_ctrl",
+            path: `${FRONT_ROOT_PATH}/control/service_ctrl`,
           },
         ],
       },
@@ -49,7 +51,11 @@ const nextConfig: NextConfig = {
         id: 4,
         outerTag: "Access Control",
         innerList: [
-          { id: 1, tag: "Access Management", path: "/control/access_ctrl" },
+          {
+            id: 1,
+            tag: "Access Management",
+            path: `${FRONT_ROOT_PATH}/control/access_ctrl`,
+          },
         ],
       },
       {
@@ -59,7 +65,7 @@ const nextConfig: NextConfig = {
           {
             id: 1,
             tag: "Subsystem Management",
-            path: "/control/subsys_ctrl",
+            path: `${FRONT_ROOT_PATH}/control/subsys_ctrl`,
           },
         ],
       },
@@ -67,8 +73,12 @@ const nextConfig: NextConfig = {
         id: 6,
         outerTag: "Subsystem Configuration",
         innerList: [
-          { id: 1, tag: "CMDB", path: "/subsystem/cmdb_cfg" },
-          { id: 2, tag: "cloud-api", path: "/subsystem/capi_cfg" },
+          { id: 1, tag: "CMDB", path: `${FRONT_ROOT_PATH}/subsystem/cmdb_cfg` },
+          {
+            id: 2,
+            tag: "cloud-api",
+            path: `${FRONT_ROOT_PATH}/subsystem/capi_cfg`,
+          },
         ],
       },
       {
@@ -78,14 +88,16 @@ const nextConfig: NextConfig = {
           {
             id: 1,
             tag: "Light House Server managment",
-            path: "/business/light_house",
+            path: `${FRONT_ROOT_PATH}/business/light_house`,
           },
         ],
       },
       {
         id: 99,
         outerTag: "Test",
-        innerList: [{ id: 1, tag: "Test Page", path: "/test/control" }],
+        innerList: [
+          { id: 1, tag: "Test Page", path: `${FRONT_ROOT_PATH}/test/control` },
+        ],
       },
     ]),
   },
