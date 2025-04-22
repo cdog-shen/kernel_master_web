@@ -28,7 +28,8 @@ export function transformJsonToKeyValueArray(json: Record<string, any>): {
 
 export function transformJson2TableMeta(
   json: Record<string, any>,
-  headerMap: Record<string, string>
+  headerMap: Record<string, string>,
+  isFlex: number = 1
 ): GridColDef[] {
   return Object.keys(json).map((key) => ({
     field: key,
@@ -37,7 +38,7 @@ export function transformJson2TableMeta(
     type: ["string", "number", "boolean", "date"].includes(typeof json[key])
       ? (typeof json[key] as GridColDef["type"])
       : undefined,
-    // flex: 1,
+    flex: isFlex,
   }));
 }
 
