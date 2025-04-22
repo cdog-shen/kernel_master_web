@@ -96,7 +96,7 @@ const nextConfig: NextConfig = {
         id: 99,
         outerTag: "Test",
         innerList: [
-          { id: 1, tag: "Test Page", path: `${FRONT_ROOT_PATH}/test/control` },
+          { id: 1, tag: "Test Page", path: `${FRONT_ROOT_PATH}/test` },
         ],
       },
     ]),

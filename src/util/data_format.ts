@@ -33,11 +33,11 @@ export function transformJson2TableMeta(
   return Object.keys(json).map((key) => ({
     field: key,
     headerName: headerMap[key] || key,
-    width: 150,
+    // width: 10,
     type: ["string", "number", "boolean", "date"].includes(typeof json[key])
       ? (typeof json[key] as GridColDef["type"])
       : undefined,
-    flex: 1,
+    // flex: 1,
   }));
 }
 
