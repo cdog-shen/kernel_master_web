@@ -9,13 +9,11 @@ import { transformJson2TableMeta } from "@/util/data_format";
 
 import { useEffect, useState } from "react";
 
-import { FetchAllUser, NewUser, EditUser } from "@/fetch/control/user";
+import { CallSubsys } from "@/fetch/control/subsys";
 
 export default function app() {
-  const [usersData, setUsersData] = useState<any[]>([]);
+  const [insData, setinsData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editStatus, setEditStatus] = useState(false);
-  const [newStatus, setNewStatus] = useState(false);
   const [info, setInfo] = useState<{
     code: number;
     msg: string;
@@ -23,72 +21,30 @@ export default function app() {
   } | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    const fetchUsersInfo = async () => {
-      try {
-        setLoading(true);
-        const data = await FetchAllUser(localStorage.getItem("JWT") || "");
-        setUsersData(data.data);
-      } catch (error) {
-        setError(error as Error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUsersInfo();
-  }, []);
-
-  const EditUserHandler = (data: {
-    id: string;
-    username?: string;
-    is_active?: boolean;
-    full_name?: string;
-    contact?: string;
-  }) => {
-    EditUser(localStorage.getItem("JWT") || "", data)
-      .then((resp) => {
-        if (resp.code !== 200) {
-          console.error("Error when updating data:", resp.msg);
-          setInfo(resp);
-        }
-        setEditStatus(true);
-        setInfo(resp);
-      })
-      .catch((error) => {
-        console.error("Error when updating data:", error);
-        setInfo({
-          code: 500,
-          msg: "Error when updating data",
-          data: String(error),
-        });
-      });
-    return [editStatus, info];
-  };
-
-  const NewUserHandler = (data: {
-    username: string;
-    passwd: string;
-    is_active?: boolean;
-  }) => {
-    NewUser(localStorage.getItem("JWT") || "", data)
-      .then((resp) => {
-        if (resp.code !== 200) {
-          console.error("Error when creating user:", resp.msg);
-          setInfo(resp);
-        }
-        setNewStatus(true);
-        setInfo(resp);
-      })
-      .catch((error) => {
-        console.error("Error when creating user:", error);
-        setInfo({
-          code: 500,
-          msg: "Error when creating user",
-          data: String(error),
-        });
-      });
-    return [newStatus, info];
-  };
+  // useEffect(() => {
+  //   const fetchSubsysInfo = async () => {
+  //     try {
+  //       const data = await CallSubsys(
+  //         localStorage.getItem("JWT") || "",
+  //         "cmdb",
+  //         {
+  //           target: "table",
+  //           operation: "get",
+  //           data: {
+  //             table: "light_ecs",
+  //             query: {},
+  //           },
+  //         }
+  //       );
+  //       setinsData(data.data.data);
+  //     } catch (error) {
+  //       setError(error as Error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchSubsysInfo();
+  // }, [loading]);
 
   if (loading) {
     return (
@@ -116,16 +72,34 @@ export default function app() {
     );
   }
 
-  const columns = transformJson2TableMeta(usersData[0], {
-    id: "ID",
-    username: "用户名",
-    is_active: "状态",
-    full_name: "全名",
-    contact: "联系方式",
-    created_at: "创建时间",
-    updated_at: "上一次修改",
-  });
-  const rows: readonly any[] | undefined = usersData;
+  const columns = transformJson2TableMeta(
+    insData[0],
+    {
+      id: "编号",
+    },
+    0
+  );
+  const rows = insData;
 
-  return <EditableDataGrid rows={rows} columns={columns} />;
+  const operate = {
+    // new: () => {
+    //   console.log("new");
+    //   setLoading(true);
+    // },
+    // edit: () => {
+    //   console.log("edit");
+    //   setLoading(true);
+    // },
+    // delete: () => {
+    //   console.log("delete");
+    //   // setLoading(true);
+    // },
+    // refresh: () => {
+    //   console.log("refresh");
+    //   reSync();
+    //   setLoading(true);
+    // },
+  };
+
+  return <></>;
 }
