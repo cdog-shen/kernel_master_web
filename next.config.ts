@@ -79,6 +79,11 @@ const nextConfig: NextConfig = {
             tag: "cloud-api",
             path: `${FRONT_ROOT_PATH}/subsystem/capi_cfg`,
           },
+          {
+            id: 3,
+            tag: "job-center commander",
+            path: `${FRONT_ROOT_PATH}/subsystem/jc_commander_cfg`,
+          },
         ],
       },
       {
