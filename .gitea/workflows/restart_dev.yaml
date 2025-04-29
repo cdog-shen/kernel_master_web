@@ -1,0 +1,34 @@
+name: KM WEB pull
+run-name: ${{ gitea.actor }} is building pages 🚀
+on: [push]
+
+jobs:
+  Explore-Gitea-Actions:
+    runs-on: 128server
+    steps:
+      - name: Config
+        run: |
+          echo "🍵 ${{ gitea.event_name }} event. a ${{ runner.os }} is running ${{ gitea.repository }} deployment."
+
+      - name: Clone
+        run: |
+          cd ~/kmws/kernel_master_web
+          git pull
+          echo "💡 The ${{ gitea.repository }} repository has been sync to the runner."
+
+      # - name: Npm build
+      #   run: |
+      #     echo "🛠️ Building the project..."
+      #     cd ~/mui-gate-page/mui-gate-page
+      #     npm install
+      #     npm run build
+
+      - name: pm2 start
+        run: |
+          echo "🚀 Restarting the project..."
+          pm2 restart CI-gate-page
+
+      - name: status
+        run: |
+          echo "🛠️ Project status..."
+          pm2 status
