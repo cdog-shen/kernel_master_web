@@ -103,7 +103,7 @@ export function CronJobTable() {
       create_time: "创建时间",
       comment: "信息",
     },
-    0
+    1
   );
   const rows = insData;
 
