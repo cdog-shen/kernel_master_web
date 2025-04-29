@@ -16,13 +16,6 @@ jobs:
           git pull
           echo "💡 The ${{ gitea.repository }} repository has been sync to the runner."
 
-      # - name: Npm build
-      #   run: |
-      #     echo "🛠️ Building the project..."
-      #     cd ~/mui-gate-page/mui-gate-page
-      #     npm install
-      #     npm run build
-
       - name: pm2 start
         run: |
           echo "🚀 Restarting the project..."
