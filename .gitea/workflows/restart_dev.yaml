@@ -16,10 +16,10 @@ jobs:
           git pull
           echo "💡 The ${{ gitea.repository }} repository has been sync to the runner."
 
-      - name: pm2 start
-        run: |
-          echo "🚀 Restarting the project..."
-          pm2 restart CI-gate-page
+      # - name: pm2 start
+      #   run: |
+      #     echo "🚀 Restarting the project..."
+      #     pm2 restart
 
       - name: status
         run: |
