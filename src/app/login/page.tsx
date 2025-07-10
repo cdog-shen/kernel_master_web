@@ -4,6 +4,7 @@ import {
   AppBar,
   TextField,
   Button,
+  ButtonGroup,
   Checkbox,
   FormControlLabel,
   Box,
@@ -54,11 +55,14 @@ const App: React.FC = () => {
   return (
     <>
       <AppBar position="static" sx={{ padding: "10px", position: "fixed" }}>
-        <Typography px={10} variant="h3" color="inherit" component="div">
-          Login
+        <Typography px={1} variant="h5" color="inherit" textAlign="center" component="div">
+          LOGIN
         </Typography>
       </AppBar>
       <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
         sx={{
           backgroundImage: "url('https://dailybing.com/api/v1')",
           backgroundSize: "cover",
@@ -66,25 +70,27 @@ const App: React.FC = () => {
           minHeight: "100vh",
         }}
       >
-        <Grid
-          container
+        <Box
+          display="flex"
           alignItems="center"
           justifyContent="center"
-          minHeight="100vh"
-          spacing={3}
+          sx={{
+            height: "45vh",
+            gap: "20px"
+          }}
         >
           <Grid
             size={4}
             sx={{
-              minHeight: "40%",
-              maxHeight: "50%",
-              maxWidth: "25%",
+              flex: 1,
               display: "flex",
+              height: "100%"
             }}
           >
-            <Paper elevation={24} sx={{ padding: "20px", flexGrow: 1 }}>
-              <Box display="flex" justifyContent="center">
+            <Paper elevation={24} sx={{ padding: "20px", flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <Box display="flex" justifyContent="center" alignItems="center" gap="10px">
                 <Avatar src="./favicon.ico"></Avatar>
+                <Typography variant="h5">Kernal Master</Typography>
               </Box>
               <Box px={2} py={1} component={"form"} onSubmit={handleLogin}>
                 <TextField
@@ -116,36 +122,26 @@ const App: React.FC = () => {
                     label="Remember Me"
                   />
                 </Box>
-                <Stack
-                  direction={"row"}
-                  spacing={2}
-                  divider={<Divider orientation="vertical" flexItem />}
-                >
+                <ButtonGroup fullWidth variant="outlined" aria-label="Login button group">
                   <Button
-                    fullWidth
-                    variant="contained"
                     color="warning"
                     type="button"
                   >
                     I Forgot
                   </Button>
                   <Button
-                    fullWidth
-                    variant="contained"
                     color="primary"
                     type="submit"
                   >
                     Log In
                   </Button>
                   <Button
-                    fullWidth
-                    variant="contained"
                     color="secondary"
                     type="button"
                   >
                     New User
                   </Button>
-                </Stack>
+                </ButtonGroup>
               </Box>
               {isAlertVisible && (
                 <Alert
@@ -162,19 +158,17 @@ const App: React.FC = () => {
           <Grid
             size={4}
             sx={{
-              minHeight: "40%",
-              maxHeight: "50%",
-              maxWidth: "25%",
+              flex: 1,
+              height: "100%",
               display: "flex",
             }}
           >
-            <Paper elevation={24} sx={{ padding: "20px", flexGrow: 1 }}>
+            <Paper elevation={24} sx={{ padding: "20px", flexGrow: 1, display: "flex", flexDirection: "column" }}>
               <Typography variant="h4">Welcome to</Typography>
-              <Typography variant="h3">Kernel master</Typography>
+              <Typography variant="h3">Kernel Master</Typography>
               <Divider />
               <Typography variant="body1" paragraph>
-                It is an operating platform for managing multi-region server
-                assets.
+                An operating platform designed for multi-region server assets management.
               </Typography>
               <Typography variant="h6" gutterBottom>
                 Powered by:
@@ -191,12 +185,13 @@ const App: React.FC = () => {
               <Typography variant="body1" align="right">
                 -- Cdog Shen
               </Typography>
+              <Box sx={{ flex: "1" }}></Box>
               <Link href="https://github.com/cdog-shen/kernel_master_ws">
                 Read more...
               </Link>
             </Paper>
           </Grid>
-        </Grid>
+        </Box>
       </Box>
     </>
   );

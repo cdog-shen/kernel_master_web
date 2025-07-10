@@ -38,9 +38,7 @@ export default function RootLayout({
             {/* 主内容区 */}
             <Box
               sx={{
-                minHeight: "100vh",
-                minWidth: "100vw",
-                backgroundColor: "background.default",
+                backgroundColor: "background.default"
               }}
             >
               {children}
