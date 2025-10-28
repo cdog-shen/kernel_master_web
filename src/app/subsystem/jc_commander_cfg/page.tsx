@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 import { CallSubsys } from "@/fetch/control/subsys";
 
-export function CronJobTable() {
+function CronJobTable() {
   const [insData, setinsData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [syncFlag, setSyncFlag] = useState(false);
