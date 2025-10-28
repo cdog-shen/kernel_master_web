@@ -137,7 +137,7 @@ export function CronJobTable() {
   );
 }
 
-export default function app() {
+export default function App() {
   return (
     <>
       <CronJobTable />
