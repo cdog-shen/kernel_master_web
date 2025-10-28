@@ -36,11 +36,11 @@ export default function App() {
   }, []);
 
   const EditSubsysHandler = (data: {
-    id: string;
+    id: number;
     subsys_name?: string;
     url?: string;
     is_enable?: boolean;
-    relate_service?: string;
+    relate_service?: number;
     token?: string;
   }) => {
     const jwt = localStorage.getItem("JWT") || "";
@@ -68,7 +68,7 @@ export default function App() {
     subsys_name?: string;
     url?: string;
     is_enable?: boolean;
-    relate_service?: string;
+    relate_service?: number;
     token?: string;
   }) => {
     const jwt = localStorage.getItem("JWT") || "";
