@@ -128,8 +128,8 @@ export default function App() {
   const rows: readonly any[] | undefined = servicesData;
 
   return (
-    <Paper elevation={10} sx={{ padding: 2 }}>
-      <Typography variant="h4">服务控制</Typography>
+    <Paper elevation={10} sx={{ margin: "20px", padding: "20px" }}>
+      <Typography variant="h4" marginBottom="20px">服务控制</Typography>
       <Paper sx={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={rows}
